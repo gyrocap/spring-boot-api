@@ -1,1 +1,6 @@
+# JAVA project
 language: java
+
+# no git logs
+git:
+  quiet: true
