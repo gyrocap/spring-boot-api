@@ -14,11 +14,17 @@ git:
 services:
   # - docker
 
+env:
+  - JAR_LOC="target/"
+  - PACKAGE_NAME="SpringBootApi"
+  - PACKAGE_VERSION="0.0.1-SNAPSHOT"
+
 jobs:
   include:
+    - stage: package jar file
+      script: mvn clean package
+      cache: $JAR_LOC$PACKAGE_NAME-$PACKAGE_VERSION.jar
     - stage: build
-      script: mvn clean install
+      script: java -jar $JAR_LOC$PACKAGE_NAME-$PACKAGE_VERSION.jar
     - stage: test
       script: mvn verify
-    - stage: deploy
-      script: mvn deploy
